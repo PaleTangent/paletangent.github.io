@@ -223,8 +223,8 @@
     <!-- 修改难度选择按钮部分，默认选中困难 -->
     <div id="difficulty-selector">
         <button class="difficulty-btn" data-pairs="4">简单 (4对)</button>
-        <button class="difficulty-btn" data-pairs="6">中等 (6对)</button>
-        <button class="difficulty-btn selected" data-pairs="8">困难 (8对)</button>
+        <button class="difficulty-btn selected" data-pairs="6">中等 (6对)</button>
+        <button class="difficulty-btn" data-pairs="8">困难 (8对)</button>
         <button class="difficulty-btn" data-pairs="10">专家 (10对)</button>
     </div>
     
@@ -257,7 +257,7 @@
         let moves = 0;
         let matchedPairs = 0;
         let canFlip = true;
-        let currentDifficulty = 8; // 默认8对(中等难度)
+        let currentDifficulty = 6; // 默认6对(中等难度)
         
         // 初始化游戏
         function initGame() {
@@ -436,7 +436,7 @@
         // 重新开始游戏
         restartBtn.addEventListener('click', initGame);
         
-        // 初始化游戏(默认困难难度)
+        // 初始化游戏(默认中等难度)
         initGame();
     </script>
 </body>
