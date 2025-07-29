@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>给最爱的姜姜</title>
+    <link rel="stylesheet" href="./assets/fontawesome-6.4.0/css/all.min.css">
+    <link href="./static/css2.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+        
+        body {
+            font-family: 'Noto Serif SC', serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffb8c6 0%, #ffdde1 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+            color: #5a3e36;
+            padding: 15px;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .heart {
+            position: absolute;
+            top: -10%;
+            font-size: 20px;
+            color: rgba(232, 67, 147, 0.6);
+            animation: fall linear forwards;
+            will-change: transform;
+        }
+        
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            width: 100%;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+            backdrop-filter: blur(5px);
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        .header {
+            margin-bottom: 25px;
+        }
+        
+        .couple-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 5rem;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border: 6px solid white;
+            position: relative;
+            transition: transform 0.5s ease;
+        }
+        
+        .couple-photo:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #e84393;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            color: #6c5ce7;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+        
+        .message {
+            background: linear-gradient(to right, #fff5f7, #fff);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 25px 0;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            text-align: left;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            position: relative;
+            border-left: 5px solid #fd79a8;
+        }
+        
+        .message p {
+            margin-bottom: 20px;
+            text-indent: 2em;
+        }
+        
+        .message::before {
+            content: """;
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 5rem;
+            color: rgba(232, 67, 147, 0.15);
+            font-family: serif;
+        }
+        
+        .interactive {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #e84393, #6c5ce7);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.35);
+            margin: 8px;
+            display: inline-block;
+            min-width: 200px;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 20px;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(25deg);
+            transition: all 0.6s;
+        }
+        
+        .btn:hover::after {
+            left: 120%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(108, 92, 231, 0.45);
+        }
+        
+        .btn:active {
+            transform: translateY(2px);
+        }
+        
+        .heart-icon {
+            color: #e84393;
+            font-size: 1.4rem;
+            margin: 0 3px;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        .footer {
+            margin-top: 35px;
+            font-size: 0.9rem;
+            color: #777;
+            line-height: 1.6;
+        }
+        
+        .hidden-message {
+            display: none;
+            background: linear-gradient(45deg, #e84393, #ff6b6b);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 25px;
+            animation: fadeIn 1s;
+            box-shadow: 0 8px 25px rgba(232, 67, 147, 0.4);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .signature {
+            margin-top: 30px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            color: #e84393;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .music-control {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+            z-index: 20;
+            color: #e84393;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .music-control:hover {
+            transform: scale(1.1);
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        
+        .date {
+            font-size: 1rem;
+            color: #888;
+            margin-top: 8px;
+            font-style: italic;
+        }
+        
+        .love-counter {
+            margin-top: 15px;
+            font-size: 1rem;
+            color: #e84393;
+            font-weight: bold;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px 20px;
+                max-width: 95%;
+            }
+            
+            h1 {
+                font-size: 2.4rem;
+            }
+            
+            .subtitle {
+                font-size: 1.15rem;
+            }
+            
+            .couple-photo {
+                width: 170px;
+                height: 170px;
+                font-size: 4rem;
+            }
+            
+            .message {
+                padding: 25px 20px;
+                font-size: 1rem;
+            }
+            
+            .btn {
+                padding: 14px 30px;
+                font-size: 1rem;
+                min-width: 180px;
+            }
+            
+            .signature {
+                font-size: 1.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .couple-photo {
+                width: 150px;
+                height: 150px;
+                font-size: 3.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.05rem;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 280px;
+                min-width: unset;
+            }
+            
+            .message {
+                padding: 20px 15px;
+            }
+            
+            .hidden-message {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 350px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .couple-photo {
+                width: 130px;
+                height: 130px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    
+    <div class="music-control" id="musicControl">
+        <i class="fas fa-play"></i>
+    </div>
+    
+    <div class="container">
+        <div class="header">
+            <div class="couple-photo">
+                <i class="fas fa-heart"></i>
+            </div>
+            <h1>亲爱的<span id="name">姜姜</span> <i class="fas fa-heart heart-icon"></i></h1>
+            <div class="subtitle">遇见你是我生命中最美的奇迹</div>
+            <div class="date">2025年7月29日</div>
+        </div>
+        
+        <div class="message">
+            <p>从第一次见到你的那一刻起，我的心就被你温柔的笑容完全俘获。你的眼睛里有星辰大海，你的声音是我最爱的旋律，你的存在让我的世界变得如此美好。</p>
+            <p>每一天和你在一起，都是我最珍贵的礼物。无论是平凡的日常还是特别的时刻，只要和你在一起，一切都变得有意义。你的快乐是我的快乐，你的悲伤是我的悲伤。</p>
+            <p>我想牵着你的手，走过春夏秋冬；我想陪在你身边，经历人生的每一个重要时刻；我想成为你最坚实的依靠，最温暖的港湾。</p>
+            <p>未来的路还很长，但我希望每一步都有你的陪伴。你愿意让我成为你生命中的永恒吗？</p>
+        </div>
+        
+        <div class="interactive">
+            <button class="btn" id="loveBtn">
+                <i class="fas fa-heart"></i> 我爱你，每一天
+            </button>
+            <button class="btn" id="yesBtn">
+                <i class="fas fa-check"></i> 我愿意，永远在一起
+            </button>
+            
+            <div id="hiddenMessage" class="hidden-message">
+                <h3>爱你哟，宝宝~<i class="fas fa-heart heart-icon"></i></h3>
+                <p>我会用一生的时间守护这份承诺，让你成为世界上最幸福的人。从今天起，我的世界只有你！</p>
+            </div>
+        </div>
+        
+        <div class="love-counter">自2025年7月14日起<br>我们已相爱: <span id="daysCounter">0</span> 天<i class="fas fa-heart heart-icon"></i></div>
+        
+        <div class="signature">永远爱你的博</div>
+        
+        <div class="footer">
+            <p>这个页面只为你一人而存在 </p>
+            <p>❤ All by DeepSeek & Tangent ❤</p>
+        </div>
+    </div>
+    
+    <audio id="bgMusic">
+        <source src="./static/告白.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // 创建飘落的心形（优化性能）
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            const heartCount = window.innerWidth < 768 ? 25 : 40;
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤';
+                heart.classList.add('heart');
+                
+                // 随机位置和动画时间
+                const left = Math.random() * 100;
+                const duration = 8 + Math.random() * 12;
+                const delay = Math.random() * 5;
+                const size = 16 + Math.random() * 20;
+                
+                heart.style.left = `${left}%`;
+                heart.style.fontSize = `${size}px`;
+                heart.style.animationDuration = `${duration}s`;
+                heart.style.animationDelay = `${delay}s`;
+                
+                heartsContainer.appendChild(heart);
+            }
+        }
+        
+        // 按钮交互
+        function setupButtons() {
+            const loveBtn = document.getElementById('loveBtn');
+            const yesBtn = document.getElementById('yesBtn');
+            const hiddenMessage = document.getElementById('hiddenMessage');
+            const daysCounter = document.getElementById('daysCounter');
+            let loveCount = 0;
+            
+            // 计算相爱天数（从固定日期开始）
+            const startDate = new Date('2025-07-14');
+            const today = new Date();
+            const diffTime = Math.abs(today - startDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            daysCounter.textContent = diffDays;
+            
+            // 点击"我爱你"按钮
+            loveBtn.addEventListener('click', function() {
+                loveCount++;
+                const messages = [
+                    "我比昨天更爱你！",
+                    "你是我生命中的阳光！",
+                    "爱你胜过千言万语！",
+                    "你让我的心跳加速！",
+                    "每一天都更爱你一点！"
+                ];
+                
+                this.innerHTML = `<i class="fas fa-heart"></i> ${messages[loveCount % messages.length]}`;
+                this.style.background = 'linear-gradient(45deg, #ff7675, #fd79a8)';
+                
+                // 添加一些动画效果
+                this.style.transform = 'scale(1.05)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 300);
+                
+                // 创建心形效果
+                createFloatingHearts(5);
+            });
+            
+            // 点击"我愿意"按钮
+            yesBtn.addEventListener('click', function() {
+                hiddenMessage.style.display = 'block';
+                document.querySelector('.signature').innerHTML = '永远爱你的博 ❤';
+                this.innerHTML = '<i class="fas fa-heart"></i> 爱你一生一世！';
+                this.style.background = 'linear-gradient(45deg, #ff7675, #fd79a8)';
+                
+                // 创建庆祝效果
+                createHearts();
+                createFloatingHearts(20);
+                
+                // 改变背景渐变
+                document.body.style.background = 'linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)';
+            });
+        }
+        
+        // 创建浮动爱心效果
+        function createFloatingHearts(count) {
+            const container = document.querySelector('.container');
+            
+            for (let i = 0; i < count; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤';
+                heart.style.position = 'absolute';
+                heart.style.fontSize = (20 + Math.random() * 30) + 'px';
+                heart.style.color = '#e84393';
+                heart.style.opacity = '0';
+                heart.style.zIndex = '15';
+                heart.style.left = (10 + Math.random() * 80) + '%';
+                
+                container.appendChild(heart);
+                
+                // 动画
+                const delay = Math.random() * 0.5;
+                const duration = 1 + Math.random() * 1.5;
+                
+                heart.animate([
+                    { opacity: 0, transform: 'translateY(0) scale(0)' },
+                    { opacity: 1, transform: 'translateY(-20px) scale(1.2)' },
+                    { opacity: 0, transform: 'translateY(-80px) scale(0.5)' }
+                ], {
+                    duration: duration * 1000,
+                    delay: delay * 1000,
+                    easing: 'ease-out'
+                });
+                
+                // 移除元素
+                setTimeout(() => {
+                    heart.remove();
+                }, (delay + duration) * 1000);
+            }
+        }
+        
+        // 设置背景音乐
+        function setupMusic() {
+            const bgMusic = document.getElementById('bgMusic');
+            const musicControl = document.getElementById('musicControl');
+            const icon = musicControl.querySelector('i');
+            
+            let isPlaying = false;
+            
+            // 音乐控制按钮
+            musicControl.addEventListener('click', function() {
+                if (isPlaying) {
+                    bgMusic.pause();
+                    icon.className = 'fas fa-play';
+                } else {
+                    bgMusic.play().catch(e => console.log('播放失败'));
+                    icon.className = 'fas fa-pause';
+                }
+                isPlaying = !isPlaying;
+            });
+            
+            // 尝试自动播放（可能需要用户交互）
+            setTimeout(() => {
+                bgMusic.play().then(() => {
+                    isPlaying = true;
+                    icon.className = 'fas fa-pause';
+                }).catch(e => {
+                    console.log('自动播放受阻，等待用户交互');
+                });
+            }, 1000);
+        }
+        
+        // 初始化
+        window.addEventListener('DOMContentLoaded', () => {
+            createHearts();
+            setupButtons();
+            setupMusic();
+            
+            // 获取名字（这里简化为固定值，实际应用中可以从URL参数获取）
+            const urlParams = new URLSearchParams(window.location.search);
+            const name = urlParams.get('name') || '姜姜';
+            document.getElementById('name').textContent = name;
+            
+            // 禁止双指缩放（提升移动端体验）
+            document.addEventListener('gesturestart', function(e) {
+                e.preventDefault();
+            });
+        });
+        
+        // 优化移动端滚动性能
+        document.addEventListener('touchmove', function(e) {
+            // 允许原生滚动
+        }, { passive: true });
+    </script>
+</body>
+</html>
